@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -a -e -x
+
+# URL of the dashboard (shouldn't change as it is installed on the dashboard)
+AMURL='<%= @amurl %>'
+# user on the dashboard
+USER='<%= @duser %>'
+# its API key
+# TODO: replace here the way your get secrets
+API_KEY='%SECRET__<%= @dashboard_apikey_secret %>__%'
+
+# URL of the storage
+SURL='<%= @surl %>'
+# user on the storage
+SUSER='<%= @suser %>'
+# its API key
+# TODO: replace here the way your get secrets
+SAPI_KEY='%SECRET__<%= @storage_apikey_secret %>__%'
+
+# UUID of the transfer location
+TRANSFER='<%= @transfer %>'
+# transfer type (one of 'standard', 'unzipped bag', 'zipped bag', 'dspace')
+TRANSFER_TYPE='<%= @transfer_type %>'
+
+cd "${0%/*}"
+python -m transfers.transfer \
+    --am-url $AMURL --user $USER --api-key $API_KEY \
+    --ss-url $SURL --ss-user $SUSER --ss-api-key $SAPI_KEY \
+    --transfer-source $TRANSFER --transfer-type $TRANSFER_TYPE \
+    --verbose
