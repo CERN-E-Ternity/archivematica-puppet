@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# This script is used to setup archivematica’s storage.
+# See https://wiki.archivematica.org/Improvements/CentOS-RedHat_support/Installation#Installing_Archivematica_Storage_Service
+# for more information.
+
+# setup groups and rights
+usermod -aG <%= @user %> <%= @group %>
+
+# install requirements
+sudo -u <%= @user %> bash -c " \
+    source /usr/lib/python2.7/archivematica/storage-service/bin/activate
+    pip install -qU mysqlclient
+    deactivate
+"
+
+# create archivematica's database
+sudo -u <%= @user %> bash -c " \
+    set -a -e -x
+    source /etc/sysconfig/archivematica-storage-service
+    cd /usr/share/archivematica/storage-service
+    /usr/lib/python2.7/archivematica/storage-service/bin/python manage.py migrate
+    /usr/lib/python2.7/archivematica/storage-service/bin/python manage.py collectstatic --noinput
+";

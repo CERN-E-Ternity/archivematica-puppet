@@ -1,0 +1,45 @@
+# SETUP
+# TODO: use a VCS Repo plugin here
+#pluginsync_filter:
+#    - vcsrepo
+
+# SSH access to the machines
+# definitions of ssh public/private key pair created using ssh-keygen
+# define the public key content (pbcopy < ~/.ssh/mysshkey.pub)
+example::utils::sshkey_publickey: ''
+# define the name of the secret key stored in your secrets manager for the ssh private key content
+example::utils::sshkey_privatekey_secret: ''
+
+# DASHBOARD
+example::archivematica::dashboard::db_name: 'MCP'
+example::archivematica::dashboard::db_host: 'localhost'
+example::archivematica::dashboard::db_port: '3306'
+example::archivematica::dashboard::db_user: 'archivematica'
+example::archivematica::dashboard::db_password: 'demo'
+
+# STORAGE
+example::archivematica::storage::db_engine: 'sqlite3'
+example::archivematica::storage::db_name: '/var/archivematica/storage-service/storage.db'
+example::archivematica::storage::db_host: ''
+example::archivematica::storage::db_port: ''
+example::archivematica::storage::db_user: 'archivematica'
+example::archivematica::storage::db_password: ''
+
+# AUTOMATION TOOLS PARAMETERS
+# URL of the dashboard (shouldn't change as it is installed on the dashboard)
+example::archivematica::requirements::automation_tools::amurl: 'http://127.0.0.1'
+# user on the dashboard
+example::archivematica::requirements::automation_tools::duser: ''
+# secret key for the dashboard api key
+example::archivematica::requirements::automation_tools::dashboard_apikey_secret: ''
+# URL of the storage
+example::archivematica::requirements::automation_tools::surl: ''
+# user on the storage
+example::archivematica::requirements::automation_tools::suser: ''
+# secret key for the storage api key
+example::archivematica::requirements::automation_tools::storage_apikey_secret: ''
+# UUID of the transfer location
+example::archivematica::requirements::automation_tools::transfer: ''
+# transfer type (one of 'standard', 'unzipped bag', 'zipped bag', 'dspace')
+example::archivematica::requirements::automation_tools::transfer_type: 'standard'
+# URL to Invenio dashboard
